@@ -29,13 +29,16 @@ $(document).ready(function() {
   }
 
   $('#slider').slider({
-  formatter: function(value) {
-    return 'Current value: ' + value;
-  },
-});
+    formatter: function(value) {
+      console.log(value);
+      return 'Current value: ' + value;
+    },
 
+  }).on('change', function(e) {
 
+    console.log('Old value:' + e.value.oldValue + ', New Value:' + e.value.newValue);
 
+  });
 
   // $(window).mousemove(function(e) {
 
