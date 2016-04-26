@@ -1,0 +1,32 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+
+body {
+  background: #1d1f1e;
+}
+
+h1, h2, h3, p, span {
+
+  color: #7a7a7a;
+  position: absolute;
+
+}
+
+div, img, input{
+  position: absolute;
+}
+
+img {
+  transform-origin: 0% 0%;
+  transform: scale(0.25);
+}
+
+#slider {
+/*  left: 200px;
+  bottom: 200px;
+  width: 1000px;*/
+}

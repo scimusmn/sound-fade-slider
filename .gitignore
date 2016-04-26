@@ -1,0 +1,5 @@
+# Don't include our keen.io api keys in the public repo
+js/keen.js
+work/
+audio/
+img/
