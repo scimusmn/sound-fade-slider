@@ -28,10 +28,6 @@ $(document).ready(function() {
   }
 
   $('#slider').slider({
-    formatter: function(value) {
-      // console.log(value);
-      return 'Current value: ' + value;
-    },
 
   }).on('change', function(e) {
 
@@ -46,7 +42,6 @@ $(document).ready(function() {
     for (var i = 0; i < xFadeSounds.length; i++) {
 
       var dist = Math.abs(val - xFadeSounds[i].xPos);
-      console.log('dist:' + dist);
 
       var vol = map(dist, 0, 85, 1.5, 0.0);
       vol = clamp(vol, 0.0, 1.0);
@@ -62,13 +57,10 @@ $(document).ready(function() {
 
 });
 
-// Utility functions
+// Utilities
 function map(val, inMin, inMax, outMin, outMax) {
-  // var mapVal =
   return (val - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
-  // return clamp(mapVal, outMin, outMax);
 }
-
 function clamp(val, min, max) {
   return Math.min(Math.max(val, min), max);
 };
