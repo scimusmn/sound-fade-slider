@@ -61,6 +61,7 @@ $(document).ready(function() {
 function map(val, inMin, inMax, outMin, outMax) {
   return (val - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
+
 function clamp(val, min, max) {
   return Math.min(Math.max(val, min), max);
 };
