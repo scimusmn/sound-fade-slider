@@ -7,7 +7,7 @@ $(document).ready(function() {
     var audioPath = $(this).attr('data-audio');
     var xPosition = parseInt($(this).attr('data-xPos'));
 
-    addXFadeSound($(this), '../' + audioPath, xPosition);
+    addXFadeSound($(this), '' + audioPath, xPosition);
 
   });
 
