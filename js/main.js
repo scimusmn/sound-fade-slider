@@ -2,18 +2,16 @@ $(document).ready(function() {
 
   var xFadeSounds = [];
 
-  $('.cross-fade-group img').each(function() {
+  $('.cross-fade-group img').each(function(index) {
 
     var audioPath = $(this).attr('data-audio');
-    var xPosition = $(this).attr('data-xPos');
+    var xPosition = parseInt($(this).attr('data-xPos'));
 
-    $(this).css('left', parseInt(xPosition));
-
-    addXFadeSound('../' + audioPath, xPosition);
+    addXFadeSound($(this), '../' + audioPath, xPosition);
 
   });
 
-  function addXFadeSound(url, x) {
+  function addXFadeSound(div, url, x) {
 
     var newSnd = new Howl({
       src: [url],
@@ -23,6 +21,7 @@ $(document).ready(function() {
     });
 
     newSnd.xPos = x;
+    newSnd.div = div;
 
     xFadeSounds.push(newSnd);
 
@@ -30,59 +29,47 @@ $(document).ready(function() {
 
   $('#slider').slider({
     formatter: function(value) {
-      console.log(value);
+      // console.log(value);
       return 'Current value: ' + value;
     },
 
   }).on('change', function(e) {
 
-    console.log('Old value:' + e.value.oldValue + ', New Value:' + e.value.newValue);
+    var val = e.value.newValue;
+
+    updateFadesByProximity(val);
 
   });
 
-  // $(window).mousemove(function(e) {
+  function updateFadesByProximity(val) {
 
-  //   var normX = e.pageX / $(window).width();
+    for (var i = 0; i < xFadeSounds.length; i++) {
 
-  //   $('footer p').text('x:' + e.pageX + ' normX:' + normX);
+      var dist = Math.abs(val - xFadeSounds[i].xPos);
+      console.log('dist:' + dist);
 
-  //   var sortedArray = distanceSort(xFadeSounds, e.pageX);
+      var vol = map(dist, 0, 85, 1.5, 0.0);
+      vol = clamp(vol, 0.0, 1.0);
+      xFadeSounds[i].volume(vol);
 
-  //   for (var i = 1; i < sortedArray.length; i++) {
+      var opac = map(dist, 100, 0.0, 0.0, 1.5);
+      opac = clamp(opac, 0.4, 1.0);
+      $(xFadeSounds[i].div).css('opacity', opac);
 
-  //     if (i >= 2) {
-  //       sortedArray[i].volume(0.0);
-  //     } else {
-  //       // Mix two closest sounds.
-  //       var maxdist = Math.abs(sortedArray[1].xPos - sortedArray[0].xPos);
-  //       var curdist = Math.abs(e.pageX - sortedArray[0].xPos);
+    }
 
-  //       var crossPoint = map(curdist, 0, maxdist, 0, 1);
-  //       console.log('cp' + crossPoint);
-  //       sortedArray[0].volume(1.0 - crossPoint);
-  //       sortedArray[1].volume(1.0 + crossPoint);
-  //     }
-
-  //   }
-
-  // });
+  }
 
 });
 
 // Utility functions
 function map(val, inMin, inMax, outMin, outMax) {
+  // var mapVal =
   return (val - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+  // return clamp(mapVal, outMin, outMax);
 }
 
-function distanceSort(arr, target) {
+function clamp(val, min, max) {
+  return Math.min(Math.max(val, min), max);
+};
 
-  return arr.sort(function(a, b) {
-
-    var distance1 = Math.abs(target - a.xPos);
-    var distance2 = Math.abs(target - b.xPos);
-
-    return distance1 == distance2 ? 0 : (distance1 > distance2 ? 1 : -1);
-
-  });
-
-}
