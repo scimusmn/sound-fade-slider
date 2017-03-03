@@ -17,15 +17,19 @@
     <body>
 
       <div class="cross-fade-group">
-        <img src="img/79-4-15.png" data-audio="sounds/A79-4-15.wav" data-xPos="66"/>
-        <img src="img/66-9-1.png" data-audio="sounds/A66-9-1.wav" data-xPos="209"/>
-        <img src="img/81-9-2.png" data-audio="sounds/A81-9-2.wav" data-xPos="362"/>
-        <img src="img/81-9-3.png" data-audio="sounds/A81-9-3.wav" data-xPos="530"/>
-        <img src="img/93-6-2.png" data-audio="sounds/A93-6-2.wav" data-xPos="726"/>
-        <img src="img/93-6-3.png" data-audio="sounds/A93-6-3.wav" data-xPos="929"/>
+        <img src="img/79-4-15.png" class="rot-left" data-audio="sounds/A79-4-15.wav" data-xPos="66"/>
+        <img src="img/66-9-1.png" class="rot-left" data-audio="sounds/A66-9-1.wav" data-xPos="209"/>
+        <img src="img/81-9-2.png" class="rot-left" data-audio="sounds/A81-9-2.wav" data-xPos="362"/>
+        <img src="img/81-9-3.png" class="rot-left" data-audio="sounds/A81-9-3.wav" data-xPos="530"/>
+        <img src="img/93-6-2.png" class="rot-left" data-audio="sounds/A93-6-2.wav" data-xPos="726"/>
+        <img src="img/93-6-3.png" class="rot-right" data-audio="sounds/A93-6-3.wav" data-xPos="929"/>
       </div>
 
-      <input id="slider" data-slider-id='slider' type="text" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide"/>
+      <img id='left' class='foot-pad left' src="img/feet.png"/>
+      <img id='right' class='foot-pad right' src="img/feet.png"/>
+      <img id='top' class='foot-pad top' src="img/feet.png"/>
+
+      <!-- <input id="slider" data-slider-id='slider' type="text" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="1" data-slider-tooltip="hide"/> -->
 
       <script src="js/vendor/jquery-1.11.2.min.js"></script>
       <script src="js/vendor/bootstrap.min.js"></script>

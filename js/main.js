@@ -11,6 +11,30 @@ $(document).ready(function() {
 
   });
 
+  $('.foot-pad').mousedown(function() {
+
+    var id = $(this).attr('id');
+
+    console.log('Foot pad mousedown.', id);
+
+    if (id == 'top') {
+      //530
+      updateFadesByProximity(530);
+    } else if (id == 'right') {
+      //726
+      updateFadesByProximity(726);
+    } else if (id == 'left') {
+      //209
+      updateFadesByProximity(209);
+    }
+
+  });
+
+  $('body').mouseup(function() {
+
+    updateFadesByProximity(-999);
+  });
+
   function addXFadeSound(div, url, x) {
 
     var newSnd = new Howl({
@@ -27,15 +51,15 @@ $(document).ready(function() {
 
   }
 
-  $('#slider').slider({
+  /* $('#slider').slider({
 
-  }).on('change', function(e) {
+   }).on('change', function(e) {
 
-    var val = e.value.newValue;
+     var val = e.value.newValue;
 
-    updateFadesByProximity(val);
+     updateFadesByProximity(val);
 
-  });
+   });*/
 
   function updateFadesByProximity(val) {
 
@@ -49,7 +73,14 @@ $(document).ready(function() {
 
       var opac = map(dist, 100, 0.0, 0.0, 1.5);
       opac = clamp(opac, 0.4, 1.0);
-      $(xFadeSounds[i].div).css('opacity', opac);
+
+      if (val == -999) {
+        $(xFadeSounds[i].div).css('opacity', 1.0);
+      } else {
+        $(xFadeSounds[i].div).css('opacity', opac);
+      }
+
+      // $(xFadeSounds[i].div).css('background-color', 'rgba(255,255,255,' + opac + ')');
 
     }
 
